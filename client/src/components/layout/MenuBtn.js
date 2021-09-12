@@ -11,13 +11,15 @@ import {
   setSelectMode,
   clearSelectMode,
   clearSelected,
+  setTheme,
 } from "../../actions/syncActions";
 
 const MenuBtn = ({
-  sync: { select_mode, selected },
+  sync: { select_mode, selected, theme },
   setSelectMode,
   clearSelectMode,
   clearSelected,
+  setTheme,
 }) => {
   const openSelectMode = () => {
     if (!select_mode) {
@@ -31,23 +33,45 @@ const MenuBtn = ({
     clearSelected();
   };
 
+  const changeTheme = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
+
   return (
     <Fragment>
       <div className="fixed-action-btn">
         {/* Menu Open Button */}
         <a
           href="#!"
-          className="btn-floating btn-large waves-effect waves-light grey darken-3"
+          className="btn-floating btn-large waves-effect waves-light blue lighten-1"
         >
           <i className="large material-icons">menu</i>
         </a>
         {/* Functional Buttons */}
         <ul>
+          {/* Theme Button */}
+          <li>
+            <a
+              href="#!"
+              className={`btn-floating waves-effect waves-light ${
+                theme === "light" ? "grey darken-3" : "grey lighten-1"
+              }`}
+              onClick={changeTheme}
+            >
+              <i className="material-icons">
+                {theme === "light" ? "dark_mode" : "light_mode"}
+              </i>
+            </a>
+          </li>
+
           {/* Logout Button */}
           <li>
-            <a href="#!" className="btn-floating waves-effect waves-light red">
+            <Link
+              to="/login"
+              className="btn-floating waves-effect waves-light red"
+            >
               <i className="material-icons">logout</i>
-            </a>
+            </Link>
           </li>
 
           {/* Upload Button */}
@@ -78,7 +102,7 @@ const MenuBtn = ({
             {/* Menu Open Button */}
             <Link
               to="/compare"
-              className="btn-floating btn-large waves-effect waves-light green darken-3"
+              className="btn-floating btn-large waves-effect waves-light green"
             >
               <i className="large material-icons">compare_arrows</i>
             </Link>{" "}
@@ -88,7 +112,7 @@ const MenuBtn = ({
             {/* Menu Open Button */}
             <a
               href="#!"
-              className="btn-floating btn-large waves-effect waves-light red darken-3"
+              className="btn-floating btn-large waves-effect waves-light red"
               onClick={closeSelectMode}
             >
               <i className="large material-icons">close</i>
@@ -100,6 +124,7 @@ const MenuBtn = ({
 };
 
 MenuBtn.propTypes = {
+  setTheme: PropTypes.func.isRequired,
   setSelectMode: PropTypes.func.isRequired,
   clearSelectMode: PropTypes.func.isRequired,
   clearSelected: PropTypes.func.isRequired,
@@ -111,6 +136,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
+  setTheme,
   setSelectMode,
   clearSelectMode,
   clearSelected,

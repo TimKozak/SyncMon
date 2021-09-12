@@ -5,15 +5,20 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "materialize-css/dist/css/materialize.min.css";
 import M from "materialize-css/dist/js/materialize.min.js";
 
-// Store (Redux)
-import { Provider } from "react-redux";
-import store from "./store";
+// Redux
+import { connect } from "react-redux";
 
 // Pages
 import Home from "./components/pages/Home";
 import Compare from "./components/pages/Compare";
+import Login from "./components/pages/Login";
 
-const App = () => {
+// Themes
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "./components/globalStyles";
+import { lightTheme, darkTheme } from "./components/Theme";
+
+const App = ({ sync: { theme } }) => {
   // Style Initialization
   useEffect(() => {
     M.AutoInit();
@@ -24,15 +29,21 @@ const App = () => {
   });
 
   return (
-    <Provider store={store}>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <GlobalStyles />
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/compare" component={Compare} />
+          <Route exact path="/login" component={Login} />
         </Switch>
       </Router>
-    </Provider>
+    </ThemeProvider>
   );
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  sync: state.sync,
+});
+
+export default connect(mapStateToProps, {})(App);

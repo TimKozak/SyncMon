@@ -1,7 +1,10 @@
 import React, { Fragment } from "react";
 
 import ComparisonBar from "../layout/ComparisonBar";
-import SelectedItem from "../syncs/SelectedItem";
+import SelectedSystem from "../syncs/SelectedSystem";
+
+// Image
+import graph from "../../images/blue_red.jpg";
 
 // Redux
 import { connect } from "react-redux";
@@ -16,26 +19,27 @@ const Compare = ({ sync: { selected } }) => {
       <div className="container">
         <div class="card">
           <div class="card-image">
-            <img src="https://source.unsplash.com/user/erondu/1600x900" />
-          </div>
-          <div class="card-content">
-            <p className="center">
-              Some valuable information about Sync Systems
-            </p>
+            <img src={graph} alt="" />
           </div>
         </div>
-      </div>
-      <div className="row">
-        <ul className="collection with-header">
-          <li className="collection-header">
-            <h4 className="center">Sync Network</h4>
-          </li>
+        <div className="row">
           {selected.length === 0 ? (
             <p className="center">{`No Syncs Selected`}</p>
           ) : (
-            selected.map((sync) => <SelectedItem sync={sync} key={sync.id} />)
+            <Fragment>
+              <SelectedSystem
+                sync={selected[0]}
+                key={selected[0].id}
+                color="blue"
+              />
+              <SelectedSystem
+                sync={selected[1]}
+                key={selected[1].id}
+                color="red"
+              />
+            </Fragment>
           )}
-        </ul>
+        </div>
       </div>
     </Fragment>
   );

@@ -4,6 +4,7 @@ import {
   ADD_TO_SELECTED,
   REMOVE_FROM_SELECTED,
   CLEAR_SELECTED,
+  SET_THEME,
 } from "./types";
 
 export const setSelectMode = () => {
@@ -28,4 +29,8 @@ export const clearSelected = () => {
 
 export const searchSyncs = (text) => {
   return;
+};
+
+export const setTheme = (theme) => {
+  return { type: SET_THEME, payload: theme };
 };

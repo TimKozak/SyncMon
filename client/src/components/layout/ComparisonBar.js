@@ -1,9 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-const ComparisonBar = ({ clearSelected, clearSelectMode }) => {
+// Redux
+import { connect } from "react-redux";
+
+// Redux actions
+import { clearSelectMode, clearSelected } from "../../actions/syncActions";
+
+const ComparisonBar = ({ clearSelectMode, clearSelected }) => {
+  const onGoBack = () => {
+    clearSelected();
+    clearSelectMode();
+  };
+
   return (
-    <nav style={{ marginBottom: "30px" }} className="green darken-3">
+    <nav style={{ marginBottom: "30px" }} className="blue lighten-1">
       <div class="nav-wrapper">
         <a
           href="#!"
@@ -14,9 +26,9 @@ const ComparisonBar = ({ clearSelected, clearSelectMode }) => {
         </a>
         <ul id="nav-mobile" className="left hide-on-med-and-down">
           <li>
-            <a href="/">
+            <Link to="/" onClick={onGoBack}>
               <i className="material-icons">arrow_back</i>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
@@ -24,4 +36,9 @@ const ComparisonBar = ({ clearSelected, clearSelectMode }) => {
   );
 };
 
-export default ComparisonBar;
+ComparisonBar.propTypes = {
+  clearSelectMode: PropTypes.func.isRequired,
+  clearSelected: PropTypes.func.isRequired,
+};
+
+export default connect(null, { clearSelectMode, clearSelected })(ComparisonBar);

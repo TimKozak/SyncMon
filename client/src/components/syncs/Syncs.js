@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import SyncItem from "./SyncItem";
 import Preloader from "../layout/Preloader";
@@ -6,7 +6,7 @@ import Preloader from "../layout/Preloader";
 // Redux
 import { connect } from "react-redux";
 
-const Syncs = ({ sync: { syncs, select_mode } }) => {
+const Syncs = ({ sync: { syncs, select_mode, theme } }) => {
   if (syncs === null) {
     return <Preloader />;
   }
