@@ -13,6 +13,5 @@ connectDB();
 app.use(express.json({ extended: false }));
 
 // Define routes
-app.use("/api/systems", require("./routes/systems"));
+app.use("/api/syncs", require("./routes/syncs"));
 app.use("/api/auth", require("./routes/auth"));
-app.use("/api/logs", require("./routes/logs"));
