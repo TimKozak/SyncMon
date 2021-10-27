@@ -5,6 +5,8 @@ import {
   REMOVE_FROM_SELECTED,
   CLEAR_SELECTED,
   SET_THEME,
+  SET_CURRENT,
+  CLEAR_CURRENT,
 } from "./types";
 
 export const setSelectMode = () => {
@@ -33,4 +35,12 @@ export const searchSyncs = (text) => {
 
 export const setTheme = (theme) => {
   return { type: SET_THEME, payload: theme };
+};
+
+export const setCurrent = (sync) => {
+  return { type: SET_CURRENT, payload: sync };
+};
+
+export const clearCurrent = () => {
+  return { type: CLEAR_CURRENT };
 };

@@ -5,6 +5,8 @@ import {
   REMOVE_FROM_SELECTED,
   CLEAR_SELECTED,
   SET_THEME,
+  SET_CURRENT,
+  CLEAR_CURRENT,
 } from "../actions/types";
 
 // Set this inital state object as defult prop for reducer
@@ -46,6 +48,16 @@ const syncReducer = (state = initialState, action) => {
       return {
         ...state,
         theme: action.payload,
+      };
+    case SET_CURRENT:
+      return {
+        ...state,
+        current: action.payload,
+      };
+    case CLEAR_CURRENT:
+      return {
+        ...state,
+        current: null,
       };
     case SET_SELECT_MODE:
       return {

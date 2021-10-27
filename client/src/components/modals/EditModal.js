@@ -21,7 +21,7 @@ const EditModal = () => {
     // ID should match the href in the modal trigger
     <div id="edit-log-modal" className="modal">
       <div className="modal-content">
-        <h4>Add a New Data / Sync</h4>
+        <h4>Edit Modal</h4>
         <br />
         <div className="row">
           <div className="input-field">
